@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --card-bg: #141a23;
+            --card-border: #212c3d;
+            --card-border-hover: #3b82f6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-color: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, var(--bg-color) 70%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .item-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 40px; 
+            padding: 0.9rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--card-border-hover);
+            box-shadow: 0 10px 20px -4px var(--accent-glow), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        .card-icon {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            border-radius: 8px; 
+            background: var(--icon-bg);
+            border: 1px solid var(--card-border);
+            flex-shrink: 0;
+            overflow: visible;
+        }
+
+        .card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 7px;
+        }
+
+        /* Superposición de icono de aleatorio */
+        .random-overlay {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            font-size: 0.6rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            flex-shrink: 0;
+            padding-left: 0.85rem;
+            border-left: 1px solid var(--card-border);
+        }
+
+        .card-footer span {
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover .card-footer span {
+            transform: translateX(3px);
+        }
+
+        .card-desc {
+            font-size: 0.825rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            padding-left: 1.25rem;
+            padding-right: 0.5rem;
+        }
+
+        .loading {
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        footer.site-footer {
+            margin-top: 4rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>zokosting</h1>
+    </header>
+
+    <main class="grid" id="project-grid">
+        <!-- 1. Gramola -->
+        <div class="item-container">
+            <a href="https://zokosting.github.io/gramola/" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon">
+                        <img src="https://github.com/zokosting/gramola/raw/main/docs/readme/icono.png" alt="Gramola Icon">
+                    </div>
+                    <div class="card-title">Gramola</div>
+                </div>
+                <div class="card-footer">Abrir <span>&rarr;</span></div>
+            </a>
+            <div class="card-desc">Karaoke en casa, la TV es el escenario y cada móvil un micro.<br/>Escaneas el QR, eliges tu color y cantas.</div>
+        </div>
+
+        <!-- 2. Skirmeo -->
+        <div class="item-container">
+            <a href="https://zokosting.github.io/skirmeo/" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon">⚔️</div>
+                    <div class="card-title">Skirmeo</div>
+                </div>
+                <div class="card-footer">Abrir <span>&rarr;</span></div>
+            </a>
+            <div class="card-desc">DAWN OF WAR<br/>Definitive Edition</div>
+        </div>
+
+        <!-- 3. QR -->
+        <div class="item-container">
+            <a href="https://zokosting.github.io/QR/" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon" title="Código QR">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                            <path d="M14 14h3v3h-3z"></path>
+                            <path d="M17 17h4v4h-4z"></path>
+                            <path d="M14 21h3"></path>
+                            <path d="M21 14v3"></path>
+                        </svg>
+                    </div>
+                    <div class="card-title">QR</div>
+                </div>
+                <div class="card-footer">Abrir <span>&rarr;</span></div>
+            </a>
+            <div class="card-desc">Latest Obsession Song.<br/>Specific Spoti Power Song.<br/>Nutritive Feature.</div>
+        </div>
+
+        <!-- 4. Timer -->
+        <div class="item-container">
+            <a href="https://zokosting.github.io/timer/" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon">⏱️</div>
+                    <div class="card-title">Timer</div>
+                </div>
+                <div class="card-footer">Abrir <span>&rarr;</span></div>
+            </a>
+            <div class="card-desc">4000 semanas.<br/>El tiempo se va...</div>
+        </div>
+
+       <!-- 5. Zoko -->
+        <div class="item-container">
+            <a id="card-zoko" href="#" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon">
+                        📓
+                        <span class="random-overlay" title="Aleatorio">🔀</span>
+                    </div>
+                    <div class="card-title">Zoko</div>
+                </div>
+                <div class="card-footer">Abrir <span>&rarr;</span></div>
+            </a>
+            <div class="card-desc loading" id="desc-zoko">Cargando URL aleatoria...</div>
+        </div>
+
+        <!-- 6. Moleskine -->
+        <div class="item-container">
+            <a id="card-moleskine" href="#" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon">
+                        ⚡
+                        <span class="random-overlay" title="Aleatorio">🔀</span>
+                    </div>
+                    <div class="card-title">Moleskine</div>
+                </div>
+                <div class="card-footer">Abrir <span>&rarr;</span></div>
+            </a>
+            <div class="card-desc loading" id="desc-moleskine">Cargando URL aleatoria...</div>
+        </div>
+
+        <!-- 7. Raindrom -->
+        <div class="item-container">
+            <a id="card-raindrom" href="#" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon">
+                        🌧️
+                        <span class="random-overlay" title="Aleatorio">🔀</span>
+                    </div>
+                    <div class="card-title">Raindrom</div>
+                </div>
+                <div class="card-footer">Abrir <span>&rarr;</span></div>
+            </a>
+            <div class="card-desc loading" id="desc-raindrom">Cargando URL aleatoria...</div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>zokosting.github.io</p>
+    </footer>
+
+    <script>
+        async function loadRandomUrl(repoName, jsonUrl, defaultDesc, customSuccessText = "Nota aleatoria.") {
+            const cardElement = document.getElementById(`card-${repoName.toLowerCase()}`);
+            const descElement = document.getElementById(`desc-${repoName.toLowerCase()}`);
+            
+            try {
+                const response = await fetch(jsonUrl);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                
+                const targetUrl = typeof data === 'string' ? data : (data.url || data.link || Object.values(data)[0]);
+                
+                if (targetUrl) {
+                    cardElement.href = targetUrl;
+                    if (descElement) descElement.textContent = customSuccessText;
+                } else {
+                    if (descElement) descElement.textContent = defaultDesc;
+                }
+            } catch (error) {
+                console.error(`Error cargando ${repoName}:`, error);
+                if (descElement) descElement.textContent = defaultDesc;
+                cardElement.href = `https://github.com/zokosting/${repoName}`;
+            } finally {
+                if (descElement) descElement.classList.remove('loading');
+            }
+        }
+
+        loadRandomUrl(
+            'Raindrom', 
+            'https://raw.githubusercontent.com/zokosting/Raindrom/refs/heads/main/random_url.json', 
+            'Enlace aleatorio.',
+            'Enlace aleatorio.'
+        );
+
+        loadRandomUrl(
+            'Moleskine', 
+            'https://raw.githubusercontent.com/zokosting/Moleskine/refs/heads/main/random_url.json', 
+            'Nota aleatoria.',
+            'Nota aleatoria.'
+        );
+
+        loadRandomUrl(
+            'Zoko', 
+            'https://raw.githubusercontent.com/zokosting/Zoko/refs/heads/main/random_url.json', 
+            'Nota aleatoria.',
+            'Nota aleatoria.'
+        );
+    </script>
+</body>
+</html>
