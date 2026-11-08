@@ -8,7 +8,7 @@
         :root {
             --bg-color: #0b0f17;
             --card-bg: #141a23;
-            --card-border: #212c3d;
+            --card-border: #1e3a8a;
             --card-border-hover: #3b82f6;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
@@ -55,7 +55,7 @@
 
         .card {
             background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
+            border: 1.5px solid var(--card-border);
             border-radius: 40px; 
             padding: 0.9rem 1.25rem;
             display: flex;
@@ -91,7 +91,7 @@
             justify-content: center;
             font-size: 1.35rem;
             border-radius: 8px; 
-            background: var(--icon-bg);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--card-border);
             flex-shrink: 0;
             overflow: visible;
@@ -132,24 +132,26 @@
             text-overflow: ellipsis;
         }
 
+        /* Botón de Abrir sin fondo tintado, sólo borde y sombra */
         .card-footer {
             display: flex;
             align-items: center;
-            gap: 0.25rem;
-            font-size: 0.85rem;
+            justify-content: center;
+            font-size: 0.8rem;
             color: var(--accent-color);
             font-weight: 600;
             flex-shrink: 0;
-            padding-left: 0.85rem;
-            border-left: 1px solid var(--card-border);
+            padding: 0.35rem 0.85rem;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
         }
 
-        .card-footer span {
-            transition: transform 0.2s ease;
-        }
-
-        .card:hover .card-footer span {
-            transform: translateX(3px);
+        .card:hover .card-footer {
+            border-color: var(--accent-color);
+            background-color: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 3px 6px rgba(59, 130, 246, 0.2);
         }
 
         .card-desc {
@@ -200,7 +202,7 @@
                     </div>
                     <div class="card-title">Gramola</div>
                 </div>
-                <div class="card-footer">Abrir <span>&rarr;</span></div>
+                <div class="card-footer">Abrir</div>
             </a>
             <div class="card-desc">Karaoke en casa, la TV es el escenario y cada móvil un micro.<br/>Escaneas el QR, eliges tu color y cantas.</div>
         </div>
@@ -212,7 +214,7 @@
                     <div class="card-icon">⚔️</div>
                     <div class="card-title">Skirmeo</div>
                 </div>
-                <div class="card-footer">Abrir <span>&rarr;</span></div>
+                <div class="card-footer">Abrir</div>
             </a>
             <div class="card-desc">DAWN OF WAR<br/>Definitive Edition</div>
         </div>
@@ -234,21 +236,24 @@
                     </div>
                     <div class="card-title">QR</div>
                 </div>
-                <div class="card-footer">Abrir <span>&rarr;</span></div>
+                <div class="card-footer">Abrir</div>
             </a>
             <div class="card-desc">Latest Obsession Song.<br/>Specific Spoti Power Song.<br/>Nutritive Feature.</div>
         </div>
 
-        <!-- 4. Timer -->
+        <!-- 4. Moleskine -->
         <div class="item-container">
-            <a href="https://zokosting.github.io/timer/" class="card" target="_blank" rel="noopener">
+            <a id="card-moleskine" href="#" class="card" target="_blank" rel="noopener">
                 <div class="card-left">
-                    <div class="card-icon">⏱️</div>
-                    <div class="card-title">Timer</div>
+                    <div class="card-icon">
+                        ⚡
+                        <span class="random-overlay" title="Aleatorio">🔀</span>
+                    </div>
+                    <div class="card-title">Moleskine</div>
                 </div>
-                <div class="card-footer">Abrir <span>&rarr;</span></div>
+                <div class="card-footer">Abrir</div>
             </a>
-            <div class="card-desc">4000 semanas.<br/>El tiempo se va...</div>
+            <div class="card-desc loading" id="desc-moleskine">Cargando URL aleatoria...</div>
         </div>
 
        <!-- 5. Zoko -->
@@ -261,27 +266,12 @@
                     </div>
                     <div class="card-title">Zoko</div>
                 </div>
-                <div class="card-footer">Abrir <span>&rarr;</span></div>
+                <div class="card-footer">Abrir</div>
             </a>
             <div class="card-desc loading" id="desc-zoko">Cargando URL aleatoria...</div>
         </div>
 
-        <!-- 6. Moleskine -->
-        <div class="item-container">
-            <a id="card-moleskine" href="#" class="card" target="_blank" rel="noopener">
-                <div class="card-left">
-                    <div class="card-icon">
-                        ⚡
-                        <span class="random-overlay" title="Aleatorio">🔀</span>
-                    </div>
-                    <div class="card-title">Moleskine</div>
-                </div>
-                <div class="card-footer">Abrir <span>&rarr;</span></div>
-            </a>
-            <div class="card-desc loading" id="desc-moleskine">Cargando URL aleatoria...</div>
-        </div>
-
-        <!-- 7. Raindrom -->
+        <!-- 6. Raindrom -->
         <div class="item-container">
             <a id="card-raindrom" href="#" class="card" target="_blank" rel="noopener">
                 <div class="card-left">
@@ -291,9 +281,38 @@
                     </div>
                     <div class="card-title">Raindrom</div>
                 </div>
-                <div class="card-footer">Abrir <span>&rarr;</span></div>
+                <div class="card-footer">Abrir</div>
             </a>
             <div class="card-desc loading" id="desc-raindrom">Cargando URL aleatoria...</div>
+        </div>
+
+        <!-- 7. Timer -->
+        <div class="item-container">
+            <a href="https://zokosting.github.io/timer/" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon">⏱️</div>
+                    <div class="card-title">Timer</div>
+                </div>
+                <div class="card-footer">Abrir</div>
+            </a>
+            <div class="card-desc">4000 semanas.<br/>El tiempo se va...</div>
+        </div>
+
+        <!-- 8. Backend -->
+        <div class="item-container">
+            <a href="https://github.com/zokosting?tab=repositories" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon" title="Privado">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <div class="card-title">Backend</div>
+                </div>
+                <div class="card-footer">Abrir</div>
+            </a>
+            <div class="card-desc">Logging y gaslogzina.<br/>Consum y consumin.<br/>RSS y rssyt.</div>
         </div>
     </main>
 
