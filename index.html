@@ -335,20 +335,32 @@
     </footer>
 
     <script>
-  const CLAVE_IP = 'proyecto_ip';
+const CLAVE_IP = 'proyecto_ip';
+  function formatearDestino8080(valor) {
+    let limpio = valor.trim();
+    if (!limpio) return null;
+    limpio = limpio.replace(/^https?:\/\//i, '').split('/')[0];
+    const hostSinPuerto = limpio.replace(/:\d+$/, '');
+    return `http://${hostSinPuerto}:8080`;
+  }
   function pedirYGuardarIP() {
-    const actual = localStorage.getItem(CLAVE_IP) || '';
-    const entrada = prompt('Configura la IP:', actual);
+    const actualGuardado = localStorage.getItem(CLAVE_IP) || '';
+    const ipSugerida = actualGuardado
+      .replace(/^https?:\/\//i, '')
+      .replace(/:\d+$/, '');
+    const entrada = prompt('Configura la IP:', ipSugerida);
     if (!entrada) return null;
-    const limpia = entrada.trim().replace(/\/+$/, '');
-    localStorage.setItem(CLAVE_IP, limpia);
-    return limpia;
+    const destino = formatearDestino8080(entrada);
+    if (!destino) return null;
+    localStorage.setItem(CLAVE_IP, destino);
+    return destino;
   }
   document.getElementById('link-proyecto').addEventListener('click', (e) => {
     e.preventDefault();
-    const urlBase = localStorage.getItem(CLAVE_IP) || pedirYGuardarIP();
-    if (urlBase) {
-      window.location.href = urlBase;
+    const guardada = localStorage.getItem(CLAVE_IP);
+    const destino = (guardada ? formatearDestino8080(guardada) : null) || pedirYGuardarIP();
+    if (destino) {
+      window.location.href = destino;
     }
   });
         async function loadRandomUrl(repoName, jsonUrl, defaultDesc, customSuccessText = "Nota aleatoria.") {
