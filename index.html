@@ -192,7 +192,21 @@
         <h1>zokosting</h1>
     </header>
 
-    <main class="grid" id="project-grid">
+    <main class="grid" id="project-grid">        
+        <!-- 0. Kodola -->
+        <div class="item-container">
+            <a href="#" id="link-proyecto" class="card" target="_blank" rel="noopener">
+                <div class="card-left">
+                    <div class="card-icon">
+                        <img src="https://raw.githubusercontent.com/beatmasterRS/skin.arctic.zephyr.mod/master/extras/icons/kodi.png" alt="Kodola Icon">
+                    </div>
+                    <div class="card-title">Kodola</div>
+                </div>
+                <div class="card-footer">Abrir</div>
+            </a>
+            <div class="card-desc">Mando a distancia.</div>
+        </div>
+
         <!-- 1. Gramola -->
         <div class="item-container">
             <a href="https://zokosting.github.io/gramola/" class="card" target="_blank" rel="noopener">
@@ -312,7 +326,7 @@
                 </div>
                 <div class="card-footer">Abrir</div>
             </a>
-            <div class="card-desc">Logging y gaslogzina.<br/>Consum y consumin.<br/>RSS y rssyt.</div>
+            <div class="card-desc">Loggin y gaslogzina.<br/>Consum y consumin.<br/>RSS y rssyt.</div>
         </div>
     </main>
 
@@ -321,6 +335,22 @@
     </footer>
 
     <script>
+  const CLAVE_IP = 'proyecto_ip';
+  function pedirYGuardarIP() {
+    const actual = localStorage.getItem(CLAVE_IP) || '';
+    const entrada = prompt('Configura la IP:', actual);
+    if (!entrada) return null;
+    const limpia = entrada.trim().replace(/\/+$/, '');
+    localStorage.setItem(CLAVE_IP, limpia);
+    return limpia;
+  }
+  document.getElementById('link-proyecto').addEventListener('click', (e) => {
+    e.preventDefault();
+    const urlBase = localStorage.getItem(CLAVE_IP) || pedirYGuardarIP();
+    if (urlBase) {
+      window.location.href = urlBase;
+    }
+  });
         async function loadRandomUrl(repoName, jsonUrl, defaultDesc, customSuccessText = "Nota aleatoria.") {
             const cardElement = document.getElementById(`card-${repoName.toLowerCase()}`);
             const descElement = document.getElementById(`desc-${repoName.toLowerCase()}`);
